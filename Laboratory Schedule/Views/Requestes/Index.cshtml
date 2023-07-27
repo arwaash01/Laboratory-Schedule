@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Laboratory_Schedule.Models.Request>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row bg-light">
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-info text-light">Create New</a>
+    </p>
+    <div class="row mt-3">
+        <div class="col-2">
+            <select class="form-select float-start">
+                <option>Language</option>
+                <option value="1">English </option>
+                <option value="2">Arabic </option>
+            </select>
+        </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <a asp-action="Edit" asp-controller="Mangements" class="btn btn-info text-light">System Config</a>    
+                </div>
+            </div>
+        
+    </div>
+    <div class="row bg-info my-3 mx-2 rounded ">
+        <h5 class=" text-light text-center">Request List</h5>
+    </div>
+    <form method ="get" asp-action="index">
+    <div class="row border border-1 rounded mx-auto">
+        <div class="col-auto my-4">
+            <div class="form-group">
+               <label  class="control-label">College</label>
+                <select name="College" class="form-select">
+                    <option></option>
+                    <option >الطب البشري ( المقر الرئيسي)</option>
+                    <option >الطب والعلوم الطبية (القطاع الجنوبي)</option>
+                    <option >طب الأسنان (القطاع الغربي)</option>
+                    <option >طب الأسنان (القطاع الرئيسي)</option>
+                    <option >الصيدلة ( المقر الرئيسي)</option>
+                    <option >الصيدلة (القطاع الجنوبي)</option>
+                    <option >العلوم الطبية التطبيقية</option>
+                    <option >البصريات</option>
+                    <option >التمريض</option>
+                    <option >التأهيل الطبي</option>
+                    <option >العلوم الصحية</option>
+                    <option >الصحة العامة والمعلوماتية</option>
+                    <option >كلية الزراعة</option>
+                </select>
+              
+            </div>
+        </div>
+        <!-- Additional-->
+            <div class="col-auto my-4">
+                <div class="form-group">
+                    <label  class="control-label">Student Status</label>
+                    <select name="StudentStatus" class="form-select">
+                        <option></option>
+                        <option>New Student</option>
+                        <option>Intern</option>
+                    </select>
+                </div>
+            </div>
+       <!-- <div class="col-auto my-4">
+            <input type="search" class="form-control" placeholder="College Name Search">
+             </div> -->
+        <div class="col-auto my-4">
+                <input type="submit" value="Search" class="btn btn-info text-light" />
+                <!-- <button type="button" class="btn btn-info text-light float-end">Extract</button>-->
+        </div>
+        <div class="col-auto my-4">
+            <b class="text-danger">Extract all or as per search results</b>
+        </div>
+        </div>
+        </form>
+
+<table class="table">
+    <thead class="table-light">
+        <tr>
+               <th>
+                    Request No 
+               </th>
+               <th>
+                    Student Name 
+               <th>
+                    National/Residence Id  
+              </th>
+              <th>
+                    UniversityNumber 
+              </th>
+              <th>
+                    Student Status 
+              </th>
+                <th>
+                    Collage
+                </th>
+              <th>
+                    Request Submisson Date 
+              </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               @Html.DisplayFor(modelItem => item.Id)
+               </td>
+            <td>
+                        @Html.DisplayFor(modelItem => item.FirstNameEng) @Html.DisplayFor(modelItem => item.FatherNameEng)@Html.DisplayFor(modelItem => item.GrandFatherNameEng) @Html.DisplayFor(modelItem => item.FamilyNameEng)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NationalResidenceId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UniversityNumber)
+           </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentStatus)
+            </td>
+             <td>
+                        @Html.DisplayFor(modelItem => item.Collage)
+             </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TestDate)
+            </td>
+            <td>
+                @*<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info text-light">Details</a>*@
+             </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
