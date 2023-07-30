@@ -1,10 +1,12 @@
 ﻿using Laboratory_Schedule.Data;
 using Laboratory_Schedule.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Laboratory_Schedule.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MangementsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -16,6 +18,7 @@ namespace Laboratory_Schedule.Controllers
 
 
         // GET: Mangements/Edit
+       
         public async Task<IActionResult> Edit(int? id)
         {
             var limitationCountResult = _context.Mangement.Where(x => x.Name == "limitationDays").FirstOrDefault();
@@ -29,6 +32,8 @@ namespace Laboratory_Schedule.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+       
+
         public async Task<IActionResult> Edit(int limitationDays)
         {
             var limitationDaysObject = _context.Mangement.Where(x => x.Name == "limitationDays").FirstOrDefault();

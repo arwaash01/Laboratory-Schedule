@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratory_Schedule.Data;
 using Laboratory_Schedule.Models;
-
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Laboratory_Schedule.Controllers
 {
@@ -27,6 +26,7 @@ namespace Laboratory_Schedule.Controllers
         // ActionResult or IActionResult: return type for web API controller actions.
         //GET
         //filter
+        [Authorize (Roles = "Admin , Recep")]
         public async Task<IActionResult> Index(string? college, string? studentstatus)
         {
             if (!string.IsNullOrEmpty(college) && !string.IsNullOrEmpty(studentstatus))
@@ -50,6 +50,7 @@ namespace Laboratory_Schedule.Controllers
         }
 
         //GET: Requestes / Create
+        [Authorize]
         public IActionResult Create()
         {
             var managment = _context.Mangement.Where(x => x.Name == "limitationDays").FirstOrDefault();
@@ -82,6 +83,7 @@ namespace Laboratory_Schedule.Controllers
         //POST : Requestes / Create
         [HttpPost] //  method of posting client data or form data to the server. HTTP
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,NationalResidenceId,UniversityNumber,StudentStatus,Collage,FirstNameEng,FatherNameEng,GrandFatherNameEng,FamilyNameEng,FirstNameArb,FatherNameArb,GrandFatherNameArb,FamilyNameArb,Email,PhoneNumber,BirthDate,MedicalFileNO,TestDate")] Request requestes)
         {
             var management = _context.Mangement.Where(x => x.Name == "limitationDays").FirstOrDefault();
