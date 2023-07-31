@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<Laboratory_Schedule.Models.Request>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -21,7 +23,10 @@
         </div>
             <div class="col-2">
                 <div class="form-group">
-                    <a asp-action="Edit" asp-controller="Mangements" class="btn btn-info text-light">System Config</a>    
+                    @if(User.IsInRole("Admin"))
+                {
+                <a asp-action="Edit" asp-controller="Mangements" class="btn btn-info text-light">System Config</a>    
+                }
                 </div>
             </div>
         

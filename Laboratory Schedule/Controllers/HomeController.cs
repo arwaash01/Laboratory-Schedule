@@ -1,6 +1,7 @@
 ﻿using Laboratory_Schedule.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Laboratory_Schedule.Controllers
@@ -41,8 +42,19 @@ namespace Laboratory_Schedule.Controllers
             return View("index", "users added successfully");
         }
 
-        public IActionResult Index()
+        public async Task <IActionResult> Index()
         {
+            var roles = await _roleManager.Roles.ToListAsync();
+
+            return View(roles);
+        }
+
+        public async Task<IActionResult> AddRole(string roleName)
+        {
+            if (roleName != null)
+            {
+                await _roleManager.CreateAsync(new IdentityRole(roleName));
+            }
             return View();
         }
 

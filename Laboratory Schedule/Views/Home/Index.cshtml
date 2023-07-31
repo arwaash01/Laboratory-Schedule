@@ -1,9 +1,25 @@
-﻿@model string
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignINManager
+@inject UserManager<IdentityUser> UserManager
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome @Model</h1>
-    <p>Learn about   <a asp-action="Index" asp-controller="Requestes">index for lab requst</a>.</p>
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about  .</p>
+
+   
 </div>
+@if (User.IsInRole("Admin") || User.IsInRole("Recep"))
+{
+    <a asp-action="Index" asp-controller="Requestes" class="btn btn-info text-light">index for lab requst</a>
+    <h1>hi admin , recep</h1>
+}
+else
+{
+    <a asp-action="Create" asp-controller="Requestes" class="btn btn-info text-light">create lab requst for student</a>
+    <h1>hi every one</h1>
+}

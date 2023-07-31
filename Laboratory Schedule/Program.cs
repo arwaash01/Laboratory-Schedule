@@ -42,4 +42,48 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+//using (var scope = app.Services.CreateScope())
+//{
+//    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+//    //check
+//    var roles = new[] { "Admin", "Recep" };
+//    foreach (var role in roles)
+//    {
+//        var roleExist = await roleManager.RoleExistsAsync(role);
+//        if (!roleExist)
+//            await roleManager.CreateAsync(new IdentityRole(role));
+//    }
+
+
+//    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+
+
+//    var adminUser = await userManager.FindByEmailAsync("renad@gmail.com");
+//    if (adminUser == null)
+//    {
+//        var user = new IdentityUser
+//        {
+//            UserName = "renad@gmail.com",
+//            Email = "renad@gmail.com",
+//        };
+//        await userManager.CreateAsync(user, "A-123456a ");
+//        await userManager.AddToRoleAsync(user, "Admin");
+//    }
+
+//    var recepUser = await userManager.FindByEmailAsync("omar@gmail.com");
+//    if (recepUser == null)
+//    {
+//        var user = new IdentityUser
+//        {
+//            UserName = "omar@gmail.com",
+//            Email = "omar@gmail.com",
+//        };
+//        await userManager.CreateAsync(user, "A-123456a");
+//        await userManager.AddToRoleAsync(user, "Recep");
+//    }
+//}
+
+
 app.Run();

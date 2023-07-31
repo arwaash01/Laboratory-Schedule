@@ -1,0 +1,6 @@
+﻿INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'0b93eb91-4d07-47ed-aa32-3a50cc0ecc0c', N'Test2R', N'TEST2R', N'97975096-18aa-4764-84e3-6c3d896dacf8')
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'3164e57b-90cb-4b54-9cd0-af8a694bc9a4', N'RecepRole', N'RECEPROLE', N'062cbbb6-30f3-486d-93b8-8525c808a12d')
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'599b3836-8127-4f4f-a652-9406e365140b', N'Recep', N'RECEP', N'66388326-1b9b-4581-84c1-bc35a98e8c79')
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'7d3c6e91-1f7f-4853-a678-99190a9743ab', N'Test1A', N'TEST1A', N'edc20ab2-115c-4b0f-b445-5ffd0fc6a937')
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'e7d72a6c-b952-4d13-bf7b-7d335cfd308e', N'Admin', N'ADMIN', N'66b2e1cc-b0bc-4d92-b429-36465986db9c')
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'f6d98d61-b92d-471c-9d97-17e71b4b54f0', N'AdminRole', N'ADMINROLE', N'14881a80-95b7-4aad-b910-5246f838c0ec')
