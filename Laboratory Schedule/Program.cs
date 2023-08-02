@@ -44,6 +44,7 @@ app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())
 {
+
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
     //check
@@ -68,7 +69,8 @@ using (var scope = app.Services.CreateScope())
             UserName = "renad@gmail.com",
             Email = "renad@gmail.com",
         };
-        await userManager.CreateAsync(user, "A-123456a ");
+
+        await userManager.CreateAsync(user, "A-123456a");
         await userManager.AddToRoleAsync(user, "Admin");
     }
 
@@ -84,6 +86,48 @@ using (var scope = app.Services.CreateScope())
         await userManager.AddToRoleAsync(user, "Recep");
     }
 }
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    var context = services.GetRequiredService<ApplicationDbContext>();
+//    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+//    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+//    var roles = new[] { "Admin", "Recep" };
+//    foreach (var role in roles)
+//    {
+//        var roleExist = await roleManager.RoleExistsAsync(role);
+//        if (!roleExist)
+//        {
+//            await roleManager.CreateAsync(new IdentityRole(role));
+//        }
+//    }
+
+//    var adminUser = await userManager.FindByEmailAsync("sara@gmail.com");
+//    if (adminUser == null)
+//    {
+//        var user = new IdentityUser
+//        {
+//            UserName = "sara@gmail.com",
+//            Email = "sara@gmail.com",
+//        };
+//        await userManager.CreateAsync(user, "A-123456a");
+//        await userManager.AddToRoleAsync(user, "Admin");
+//    }
+
+//    var recepUser = await userManager.FindByEmailAsync("reem@gmail.com");
+//    if (recepUser == null)
+//    {
+//        var user = new IdentityUser
+//        {
+//            UserName = "reem@gmail.com",
+//            Email = "reem@gmail.com",
+//        };
+//        await userManager.CreateAsync(user, "A-123456a\"");
+//        await userManager.AddToRoleAsync(user, "Recep");
+//    }
+//}
 
 
 app.Run();

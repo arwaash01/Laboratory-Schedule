@@ -26,33 +26,52 @@ namespace Laboratory_Schedule.Controllers
         // ActionResult or IActionResult: return type for web API controller actions.
         //GET
         //filter
-        [Authorize (Roles = "Admin , Recep")]
-        public async Task<IActionResult> Index(string? college, string? studentstatus)
+        [Authorize(Roles = "Admin , Recep")]
+        //public async Task<IActionResult> Index(string? college, string? studentstatus)
+        //{
+
+
+        //    if (!string.IsNullOrEmpty(college) && !string.IsNullOrEmpty(studentstatus))
+        //    {
+        //        return View(await _context.Request.Where(r => r.Collage == college && r.StudentStatus == studentstatus).ToListAsync());
+        //    }
+
+        //    else if (!string.IsNullOrEmpty(college) || !string.IsNullOrEmpty(studentstatus))
+        //    {
+        //        return View(await _context.Request.Where(r => r.Collage == college || r.StudentStatus == studentstatus).ToListAsync());
+        //    }
+        //    else
+        //    {
+        //        return _context.Request != null ?
+        //                    View(await _context.Request.ToListAsync()) :
+        //                    Problem("Entity set 'ApplicationDbContext.Requests'  is null.");
+
+        //    }
+
+
+        //}
+        public async Task<IActionResult> Index(string searchString , string searchBy)
         {
-            
-
-            if (!string.IsNullOrEmpty(college) && !string.IsNullOrEmpty(studentstatus))
+            if (!String.IsNullOrEmpty(searchString))
             {
-                return View(await _context.Request.Where(r => r.Collage == college && r.StudentStatus == studentstatus).ToListAsync());
+
+                if (searchBy == "Collage")
+                {
+                    return View(await _context.Request.Where(s => s.Collage!.Contains(searchString)).ToListAsync());
+                }
+                else if (searchBy == "Student Status")
+                {
+                    return View(await _context.Request.Where(s => s.StudentStatus!.Contains(searchString)).ToListAsync());
+
+                } 
             }
 
-            else if (!string.IsNullOrEmpty(college) || !string.IsNullOrEmpty(studentstatus))
-            {
-                return View(await _context.Request.Where(r => r.Collage == college || r.StudentStatus == studentstatus).ToListAsync());
-            }
-            else
-            {
-                return _context.Request != null ?
-                            View(await _context.Request.ToListAsync()) :
-                            Problem("Entity set 'ApplicationDbContext.Requests'  is null.");
-
-            }
-
+              return View(await _context.Request.ToListAsync());
 
         }
 
         //GET: Requestes / Create
-     
+
         public IActionResult Create()
         {
             var managment = _context.Mangement.Where(x => x.Name == "limitationDays").FirstOrDefault();
