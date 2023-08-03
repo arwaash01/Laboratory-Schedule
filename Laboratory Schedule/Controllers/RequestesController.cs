@@ -75,9 +75,9 @@ namespace Laboratory_Schedule.Controllers
         public IActionResult Create()
         {  
             // take collages from database
-            VMStudentAndCollages vmstudentandcollages = new VMStudentAndCollages();
+            VMStudentAndCollages vmStudentandCollages = new VMStudentAndCollages();
             var collages =_context.Collages.ToList();
-            vmstudentandcollages.CollagesSelectList = new SelectList(collages, "Id", "Name");
+            vmStudentandCollages.CollagesSelectList = new SelectList(collages, "Id", "Name");
             // show Avilable Dates
             var managment = _context.Mangement.Where(x => x.Name == "limitationDays").FirstOrDefault();
             if (managment is null)
@@ -104,36 +104,42 @@ namespace Laboratory_Schedule.Controllers
             }
             ViewBag.AvailablDates = avilableDates;
            
-            return View(vmstudentandcollages);
+            return View(vmStudentandCollages);
         }
 
-        //POST : Requestes / Create
+        //POST : Requestes / Create 
+        // create post to validate
         [HttpPost] //  method of posting client data or form data to the server. HTTP
         [ValidateAntiForgeryToken]
        
-        public async Task<IActionResult> Create([Bind("Id,NationalResidenceId,UniversityNumber,StudentStatus,Collage,FirstNameEng,FatherNameEng,GrandFatherNameEng,FamilyNameEng,FirstNameArb,FatherNameArb,GrandFatherNameArb,FamilyNameArb,Email,PhoneNumber,BirthDate,MedicalFileNO,TestDate")] Request requestes)
+        public async Task<IActionResult> Create([Bind("Id,NationalResidenceId,UniversityNumber,StudentStatus,Collage,FirstNameEng,FatherNameEng,GrandFatherNameEng,FamilyNameEng,FirstNameArb,FatherNameArb,GrandFatherNameArb,FamilyNameArb,Email,PhoneNumber,BirthDate,MedicalFileNO,TestDate")] Request request)
         {
+            VMStudentAndCollages vmStudentandCollages = new VMStudentAndCollages();
+            var collages = _context.Collages.ToList();
+            vmStudentandCollages.CollagesSelectList = new SelectList(collages, "Id", "Name");
+            vmStudentandCollages.Request= request;
+
             var management = _context.Mangement.Where(x => x.Name == "limitationDays").FirstOrDefault();
             if (management is null)
             {
                 ViewBag.ErrorMessage = "You need to set limit in management page";
-                return View();
+                return View(vmStudentandCollages);
             }
             var limitDays = management.Value;
-            var requestsCount = _context.Request.Where(X => X.TestDate == requestes.TestDate).Count();
+            var requestsCount = _context.Request.Where(X => X.TestDate == request.TestDate).Count();
             if (requestsCount >= limitDays)
             {
                 ViewBag.ErrorMessage = "Sorry,The limit of Requests for this Day is Reached";
-                return View();
+                return View(vmStudentandCollages);
             }
             if (ModelState.IsValid)
             {
-                _context.Add(requestes);
+                _context.Add(request);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
                 return RedirectToAction("Message");
             }
-            return View(requestes);
+            return View(vmStudentandCollages);
         }
         public IActionResult Message()
         {

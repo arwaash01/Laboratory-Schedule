@@ -9,7 +9,7 @@ namespace Laboratory_Schedule.Models
     {
         public int Id { get; set; }
 
-        [RegularExpression(@"^[0-9]{10}$")]
+       // [RegularExpression(@"^[0-9]{10}$")]
         public int NationalResidenceId { get; set; }
 
         
