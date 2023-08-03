@@ -11,5 +11,8 @@ namespace Laboratory_Schedule.Data
         }
         public DbSet<Laboratory_Schedule.Models.Request>? Request { get; set; }
         public DbSet<Laboratory_Schedule.Models.Mangement>? Mangement { get; set; }
+        public DbSet<Laboratory_Schedule.Models.Collages>? Collages { get; set; }
     }
+
+
 }

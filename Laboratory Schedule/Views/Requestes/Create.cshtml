@@ -1,8 +1,9 @@
-﻿@model Laboratory_Schedule.Models.Request
+﻿@model Laboratory_Schedule.Models.VMStudentAndCollages
+
 
 @{
     ViewData["Title"] = "Create";
-    var Themessage = ViewBag.ErrorMessage;
+    
 }
 
 
@@ -34,35 +35,38 @@
             <!--first row-->
             <div class="row">
                 <div class="col">
+                <!--  Request.  it is request proprety in VM not Request MODEL-->
                 <div class="form-group">
-                    <label asp-for="NationalResidenceId" class="control-label"></label>
-                    <input asp-for="NationalResidenceId" class="form-control" />
-                    <span asp-validation-for="NationalResidenceId" class="text-danger"></span>
+                    <label asp-for="Request.NationalResidenceId" class="control-label"></label>
+                    <input asp-for="Request.NationalResidenceId" class="form-control" />
+                    <span asp-validation-for="Request.NationalResidenceId" class="text-danger"></span>
                 </div>
                 </div>
                 <div class="col">
                 <div class="form-group">
-                    <label asp-for="UniversityNumber" class="control-label"></label>
-                    <input asp-for="UniversityNumber" class="form-control" />
-                    <span asp-validation-for="UniversityNumber" class="text-danger"></span>
+                    <label asp-for="Request.UniversityNumber" class="control-label"></label>
+                    <input asp-for="Request.UniversityNumber" class="form-control" />
+                    <span asp-validation-for="Request.UniversityNumber" class="text-danger"></span>
                 </div>
                   </div>
                 <div class="col">
                 <div class="form-group">
-                    <label asp-for="StudentStatus" class="control-label">Student Status</label>
-                    <select asp-for="StudentStatus" class="form-select">
+                    <label asp-for="Request.StudentStatus" class="control-label">Student Status</label>
+                    <select asp-for="Request.StudentStatus" class="form-select">
                           <option>Select</option>
                         <option >New Student</option>
                         <option >Intern</option>
                           </select>
-                    <span asp-validation-for="StudentStatus" class="text-danger"></span>
+                    <span asp-validation-for="Request.StudentStatus" class="text-danger"></span>
                 </div>
                 </div>
                 <div class="col">
                 <div class="form-group">
-                    <label asp-for="Collage" class="control-label">College</label>
-                    <select asp-for="Collage" class="form-select">
-                    <option></option>
+                    <label asp-for="Request.Collage" class="control-label">College</label>
+                    
+                    <select asp-for="Request.Collage" asp-items="Model.CollagesSelectList" class="form-select">
+
+                   @* <option></option>
                     <option >الطب البشري ( المقر الرئيسي)</option>
                     <option >الطب والعلوم الطبية (القطاع الجنوبي)</option>
                     <option >طب الأسنان (القطاع الغربي)</option>
@@ -75,9 +79,9 @@
                     <option >التأهيل الطبي</option>
                     <option >العلوم الصحية</option>
                     <option >الصحة العامة والمعلوماتية</option>
-                    <option >كلية الزراعة</option>
+                    <option >كلية الزراعة</option>*@
                 </select>
-                    <span asp-validation-for="Collage" class="text-danger"></span>
+                    <span asp-validation-for="Request.Collage" class="text-danger"></span>
 
                 </div>
                 </div>
@@ -87,30 +91,30 @@
             <div class="row">
                 <div class="col">
             <div class="form-group">
-                    <label asp-for="FirstNameEng" class="control-label"></label>
-                    <input asp-for="FirstNameEng" class="form-control" placeholder="Name" />
-                    <span asp-validation-for="FirstNameEng" class="text-danger"></span>
+                    <label asp-for="Request.FirstNameEng" class="control-label"></label>
+                    <input asp-for="Request.FirstNameEng" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Request.FirstNameEng" class="text-danger"></span>
             </div>
             </div>
             <div class="col">
             <div class="form-group">
-                    <label asp-for="FatherNameEng" class="control-label"></label>
-                    <input asp-for="FatherNameEng" class="form-control" placeholder="Name" />
-                    <span asp-validation-for="FatherNameEng" class="text-danger"></span>
+                    <label asp-for="Request.FatherNameEng" class="control-label"></label>
+                    <input asp-for="Request.FatherNameEng" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Request.FatherNameEng" class="text-danger"></span>
             </div>
             </div>
             <div class="col">
             <div class="form-group">
-                    <label asp-for="GrandFatherNameEng" class="control-label"></label>
-                    <input asp-for="GrandFatherNameEng" class="form-control" placeholder="Name" />
-                    <span asp-validation-for="GrandFatherNameEng" class="text-danger"></span>
+                    <label asp-for="Request.GrandFatherNameEng" class="control-label"></label>
+                    <input asp-for="Request.GrandFatherNameEng" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Request.GrandFatherNameEng" class="text-danger"></span>
             </div>
             </div>
             <div class="col">
             <div class="form-group">
-                    <label asp-for="FamilyNameEng" class="control-label"></label>
-                    <input asp-for="FamilyNameEng" class="form-control" placeholder="Name" />
-                    <span asp-validation-for="FamilyNameEng" class="text-danger"></span>
+                    <label asp-for="Request.FamilyNameEng" class="control-label"></label>
+                    <input asp-for="Request.FamilyNameEng" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Request.FamilyNameEng" class="text-danger"></span>
             </div>
             </div>
             </div>
@@ -118,30 +122,30 @@
             <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label asp-for="FirstNameArb" class="control-label"></label>
-                    <input asp-for="FirstNameArb" class="form-control" placeholder="Name" />
-                    <span asp-validation-for="FirstNameArb" class="text-danger"></span>
+                    <label asp-for="Request.FirstNameArb" class="control-label"></label>
+                    <input asp-for="Request.FirstNameArb" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Request.FirstNameArb" class="text-danger"></span>
             </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label asp-for="FatherNameArb" class="control-label"></label>
-                    <input asp-for="FatherNameArb" class="form-control" placeholder="Name" />
-                    <span asp-validation-for="FatherNameArb" class="text-danger"></span>
+                    <label asp-for="Request.FatherNameArb" class="control-label"></label>
+                    <input asp-for="Request.FatherNameArb" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Request.FatherNameArb" class="text-danger"></span>
             </div>
             </div>
             <div class="col">
             <div class="form-group">
-                    <label asp-for="GrandFatherNameArb" class="control-label"></label>
-                    <input asp-for="GrandFatherNameArb" class="form-control" placeholder="Name" />
-                    <span asp-validation-for="GrandFatherNameArb" class="text-danger"></span>
+                    <label asp-for="Request.GrandFatherNameArb" class="control-label"></label>
+                    <input asp-for="Request.GrandFatherNameArb" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Request.GrandFatherNameArb" class="text-danger"></span>
             </div>
             </div>
             <div class="col">
             <div class="form-group">
-                    <label asp-for="FamilyNameArb" class="control-label"></label>
-                    <input asp-for="FamilyNameArb" class="form-control" placeholder="Name" />
-                    <span asp-validation-for="FamilyNameArb" class="text-danger"></span>
+                    <label asp-for="Request.FamilyNameArb" class="control-label"></label>
+                    <input asp-for="Request.FamilyNameArb" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Request.FamilyNameArb" class="text-danger"></span>
             </div>
             </div>
             </div>
@@ -149,30 +153,30 @@
             <div class="row">
                 <div class="col">
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" type="email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                    <label asp-for="Request.Email" class="control-label"></label>
+                    <input asp-for="Request.Email" type="email" class="form-control" />
+                    <span asp-validation-for="Request.Email" class="text-danger"></span>
             </div>
             </div>
             <div class="col">
             <div class="form-group">
-                    <label asp-for="PhoneNumber" class="control-label"></label>
-                    <input asp-for="PhoneNumber" class="form-control" placeholder="05xxxxxxxx" />
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    <label asp-for="Request.PhoneNumber" class="control-label"></label>
+                    <input asp-for="Request.PhoneNumber" class="form-control" placeholder="05xxxxxxxx" />
+                    <span asp-validation-for="Request.PhoneNumber" class="text-danger"></span>
             </div>
             </div>
             <div class="col">
             <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" type="date" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    <label asp-for="Request.BirthDate" class="control-label"></label>
+                    <input asp-for="Request.BirthDate" type="date" class="form-control" />
+                    <span asp-validation-for="Request.BirthDate" class="text-danger"></span>
             </div>
             </div>
             <div class="col">
             <div class="form-group">
-                    <label asp-for="MedicalFileNO" class="control-label"></label>
-                    <input asp-for="MedicalFileNO" class="form-control" placeholder="Optional" />
-                    <span asp-validation-for="MedicalFileNO" class="text-danger"></span>
+                    <label asp-for="Request.MedicalFileNO" class="control-label"></label>
+                    <input asp-for="Request.MedicalFileNO" class="form-control" placeholder="Optional" />
+                    <span asp-validation-for="Request.MedicalFileNO" class="text-danger"></span>
             </div>
             </div>
         </div>
@@ -183,9 +187,6 @@
                 <b class="text-info">Kindly select a sutable date and time for needed test.</b>
             <div class="col-3">
             <div class="form-group">
-               @* <label asp-for="TestDate" class="control-label"></label>
-                    <input asp-for="TestDate" type="date" class="form-control" />
-                <span asp-validation-for="TestDate" class="text-danger"></span>*@
                     <select class="form-control" name="TestDate">
                         @if (ViewBag.AvailablDates is not null)
                         {

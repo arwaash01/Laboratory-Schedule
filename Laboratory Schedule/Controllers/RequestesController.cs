@@ -73,7 +73,12 @@ namespace Laboratory_Schedule.Controllers
         //GET: Requestes / Create
 
         public IActionResult Create()
-        {
+        {  
+            // take collages from database
+            VMStudentAndCollages vmstudentandcollages = new VMStudentAndCollages();
+            var collages =_context.Collages.ToList();
+            vmstudentandcollages.CollagesSelectList = new SelectList(collages, "Id", "Name");
+            // show Avilable Dates
             var managment = _context.Mangement.Where(x => x.Name == "limitationDays").FirstOrDefault();
             if (managment is null)
             {
@@ -98,7 +103,8 @@ namespace Laboratory_Schedule.Controllers
                 avilableDates.Add(date);
             }
             ViewBag.AvailablDates = avilableDates;
-            return View();
+           
+            return View(vmstudentandcollages);
         }
 
         //POST : Requestes / Create
