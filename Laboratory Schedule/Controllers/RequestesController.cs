@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Laboratory_Schedule.Data;
 using Laboratory_Schedule.Models;
 using Microsoft.AspNetCore.Authorization;
+using ClosedXML.Excel;
+using System.Data;
 
 namespace Laboratory_Schedule.Controllers
 {
@@ -87,6 +89,8 @@ namespace Laboratory_Schedule.Controllers
             }
             var limitDays = managment.Value;
 
+            //var avilabledates = _context.Mangement.ToList();
+            //vmstudentandcollages.AvailablDates = new SelectList(avilabledates, "Id", "Name", "Value");
             var dateTo = DateTime.Now.AddDays(30);
             List<DateTime> avilableDates = new List<DateTime>();
             for (var date = DateTime.Now; date <= dateTo; date = date.AddDays(1))
@@ -144,6 +148,81 @@ namespace Laboratory_Schedule.Controllers
         public IActionResult Message()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Request == null)
+            {
+                return NotFound();
+            }
+
+            var request = await _context.Request
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (request == null)
+            {
+                return NotFound();
+            }
+
+            return View(request);
+        }
+        [HttpGet]
+        public async Task<FileResult> ExportRequestsExal()
+        {
+            var request = await _context.Request.ToListAsync();
+            var fileName = "student request.xlsx";
+
+            return GenerateExal(fileName, request);
+
+
+        }
+        private FileResult GenerateExal(string fileName, IEnumerable<Request> request)
+        {
+            DataTable dataTable = new DataTable("Request");
+            dataTable.Columns.AddRange(new DataColumn[]
+            {
+               new DataColumn ("Id"),
+               new DataColumn ("NationalResidenceId"),
+               new DataColumn ("UniversityNumber"),
+               new DataColumn ("StudentStatus"),
+               new DataColumn ("Collage"),
+               new DataColumn ("FirstNameEng"),
+               new DataColumn ("FatherNameEng"),
+               new DataColumn ("GrandFatherNameEng"),
+               new DataColumn ("FamilyNameEng"),
+               new DataColumn ("FirstNameArb"),
+               new DataColumn ("FatherNameArb"),
+               new DataColumn ("GrandFatherNameArb"),
+               new DataColumn ("FamilyNameArb"),
+               new DataColumn ("Email"),
+               new DataColumn ("PhoneNumber"),
+               new DataColumn ("BirthDate"),
+               new DataColumn ("MedicalFileNO"),
+               new DataColumn ("TestDate"),
+
+            });
+
+            foreach (var student in request)
+            {
+                dataTable.Rows.Add(student.Id, student.NationalResidenceId, student.UniversityNumber, student.StudentStatus, student.Collage,
+                    student.FirstNameEng, student.FatherNameEng, student.GrandFatherNameEng, student.FamilyNameEng,
+                    student.FirstNameArb, student.FatherNameArb, student.GrandFatherNameArb, student.FamilyNameArb,
+                    student.Email, student.PhoneNumber, student.BirthDate, student.MedicalFileNO,
+                    student.TestDate);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dataTable);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray()
+                        , "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+                }
+
+            }
+
         }
 
 

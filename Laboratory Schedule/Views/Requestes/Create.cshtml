@@ -187,7 +187,7 @@
                 <b class="text-info">Kindly select a sutable date and time for needed test.</b>
             <div class="col-3">
             <div class="form-group">
-                    <select class="form-control" name="TestDate">
+                    <select asp-for="Request.TestDate"  class="form-control">
                         @if (ViewBag.AvailablDates is not null)
                         {
                             var availablDates = (List<DateTime>)ViewBag.AvailablDates;
