@@ -7,5 +7,8 @@ namespace Laboratory_Schedule.Models
         public Request Request { get; set; }
 
         public SelectList CollagesSelectList  { get; set; }
+
+        public SelectList AvailablDates { get; set; }
+
     }
 }

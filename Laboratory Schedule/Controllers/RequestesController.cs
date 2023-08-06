@@ -91,6 +91,7 @@ namespace Laboratory_Schedule.Controllers
 
             //var avilabledates = _context.Mangement.ToList();
             //vmstudentandcollages.AvailablDates = new SelectList(avilabledates, "Id", "Name", "Value");
+
             var dateTo = DateTime.Now.AddDays(30);
             List<DateTime> avilableDates = new List<DateTime>();
             for (var date = DateTime.Now; date <= dateTo; date = date.AddDays(1))

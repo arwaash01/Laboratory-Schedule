@@ -90,7 +90,8 @@
                </div>
               
             <div class="col-auto my-2">
-            <button type="button" class="btn btn-info text-light float-end">Extract</button>
+            @*<button type="button" class="btn btn-info text-light float-end">Extract</button>*@
+                <a class="btn btn-info text-light float-end" asp-action="ExportRequestsExal">Extract</a>
             </div>
             <div class="col-auto my-3">
                 <b class="text-danger">Extract all or as per search results</b>
@@ -153,7 +154,7 @@
                 @Html.DisplayFor(modelItem => item.TestDate)
             </td>
             <td>
-                @*<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info text-light">Details</a>*@
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info text-light">Details</a>
              </td>
         </tr>
 }
