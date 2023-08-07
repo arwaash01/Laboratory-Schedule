@@ -9,10 +9,11 @@ namespace Laboratory_Schedule.Models
     {
         public int Id { get; set; }
 
-       // [RegularExpression(@"^[0-9]{10}$")]
+        [Range(1, 10, ErrorMessage = "InvalidNationalResidenceId.")]
+
         public int NationalResidenceId { get; set; }
 
-        
+       
         public int UniversityNumber { get; set; }
 
         public string StudentStatus { get; set; }
@@ -45,5 +46,9 @@ namespace Laboratory_Schedule.Models
 
 
         public DateTime TestDate { get; set; }
+
+        public string? NationalResidenceIdName { get; set; }
+        public string? StudentIdName { get; set; }
+
     }
 }

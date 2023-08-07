@@ -35,43 +35,7 @@
         <h5 class=" text-light text-center">Request List</h5>
     </div>
     <form method ="get" asp-action="index">
-    <div class="row border border-1 rounded mx-auto">
-
-@*            <div class="col-auto ">
-            <div class="form-group">
-               <label  class="control-label">College</label>
-                <select c class="form-select">
-                    <option></option>
-                    <option >الطب البشري ( المقر الرئيسي)</option>
-                    <option >الطب والعلوم الطبية (القطاع الجنوبي)</option>
-                    <option >طب الأسنان (القطاع الغربي)</option>
-                    <option >طب الأسنان (القطاع الرئيسي)</option>
-                    <option >الصيدلة ( المقر الرئيسي)</option>
-                    <option >الصيدلة (القطاع الجنوبي)</option>
-                    <option >العلوم الطبية التطبيقية</option>
-                    <option >البصريات</option>
-                    <option >التمريض</option>
-                    <option >التأهيل الطبي</option>
-                    <option >العلوم الصحية</option>
-                    <option >الصحة العامة والمعلوماتية</option>
-                    <option >كلية الزراعة</option>
-                </select>
-              
-            </div>
-        </div>
-        <!-- Additional-->
-            <div class="col-auto">
-                <div class="form-group">
-                    <label  class="control-label">Student Status</label>
-                    <select name="StudentStatus" class="form-select">
-                        <option></option>
-                        <option>New Student</option>
-                        <option>Intern</option>
-                    </select>
-                </div>
-            </div>*@
-
-            
+    <div class="row border border-1 rounded mx-auto">            
             <div class="col-auto my-2">
                     <select name="searchBy" class="form-select">
                     <option></option>
@@ -90,7 +54,6 @@
                </div>
               
             <div class="col-auto my-2">
-            @*<button type="button" class="btn btn-info text-light float-end">Extract</button>*@
                 <a class="btn btn-info text-light float-end" asp-action="ExportRequestsExal">Extract</a>
             </div>
             <div class="col-auto my-3">

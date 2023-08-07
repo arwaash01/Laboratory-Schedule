@@ -30,7 +30,7 @@
     </div>
 
    
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <!--first row-->
             <div class="row">
@@ -163,17 +163,39 @@
             </div>
             </div>
         </div>
-        <hr/>
-
             <!--5th row-->
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Request.NationalResidenceIdName"  class="control-label">National/Residence Id</label>
+                    <input name="NationalResidenceIdName" type="file" class="control-label">
+                    <span asp-validation-for="Request.NationalResidenceIdName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Request.StudentIdName" class="control-label">Student Id</label>
+                    <input name="StudentIdName" type="file" class="control-label">
+                    <span asp-validation-for="Request.StudentIdName" class="text-danger"></span>
+                </div>
+            </div>
+            <b class="text-danger">
+                * In case the Student Id is not available, please attach a copy of Qassim
+                University student file.
+            </b>
+
+ 
+        </div>
+        <hr/>
+        <!--6th row-->
             <div class="row">
                 <b class="text-info">Kindly select a sutable date and time for needed test.</b>
             <div class="col-3">
             <div class="form-group">
-                    <select asp-for="Request.TestDate"  class="form-control">
-                        @if (ViewBag.AvailablDates is not null)
+                    <select asp-for="Request.TestDate" class="form-control">
+                        @if (Model.AvailablDates is not null)
                         {
-                            var availablDates = (List<DateTime>)ViewBag.AvailablDates;
+                            var availablDates = (List<DateTime>)Model.AvailablDates;
                             foreach (var availablDate in  availablDates)
                             {
                                 <option>@availablDate.ToLongDateString()</option>

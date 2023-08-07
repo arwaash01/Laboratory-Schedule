@@ -6,7 +6,170 @@
 
 <h1>Details</h1>
 
-<div>
+<div class="row bg-light">
+<div class="row bg-info my-3 mx-2 rounded ">
+    <h5 class=" text-light text-center">Student Details </h5>
+</div>
+
+
+<form asp-action="Details" >
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <!--first row-->
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="NationalResidenceId" class="control-label"></label>
+                <input asp-for="NationalResidenceId" class="form-control" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="UniversityNumber" class="control-label"></label>
+                <input asp-for="UniversityNumber" class="form-control" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="StudentStatus" class="control-label">Student Status</label>
+                <option class="form-control" readonly>@Html.DisplayFor(model => model.StudentStatus)</option>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Collage" class="control-label">College</label>
+                <option class="form-control" readonly>@Html.DisplayFor(model => model.Collage)</option>
+            </div>
+        </div>
+    </div>
+
+    <!--second row-->
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="FirstNameEng" class="control-label"></label>
+                <input asp-for="FirstNameEng" class="form-control" placeholder="Name" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="FatherNameEng" class="control-label"></label>
+                <input asp-for="FatherNameEng" class="form-control" placeholder="Name" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="GrandFatherNameEng" class="control-label"></label>
+                <input asp-for="GrandFatherNameEng" class="form-control" placeholder="Name" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="FamilyNameEng" class="control-label"></label>
+                <input asp-for="FamilyNameEng" class="form-control" placeholder="Name" readonly />
+            </div>
+        </div>
+    </div>
+    <!--3ed row-->
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="FirstNameArb" class="control-label"></label>
+                <input asp-for="FirstNameArb" class="form-control" placeholder="Name" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="FatherNameArb" class="control-label"></label>
+                <input asp-for="FatherNameArb" class="form-control" placeholder="Name" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="GrandFatherNameArb" class="control-label"></label>
+                <input asp-for="GrandFatherNameArb" class="form-control" placeholder="Name" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="FamilyNameArb" class="control-label"></label>
+                <input asp-for="FamilyNameArb" class="form-control" placeholder="Name" readonly />
+            </div>
+        </div>
+    </div>
+    <!--4th row-->
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" type="email" class="form-control" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="05xxxxxxxx" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" type="date" class="form-control" readonly />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="MedicalFileNO" class="control-label"></label>
+                <input asp-for="MedicalFileNO"  class="form-control" readonly />
+            </div>
+        </div>
+    </div>
+    <!--5th row-->
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="NationalResidenceIdName" class="control-label">National/Residence Id</label>
+                <img src="~/UploadedFiles/@Model.NationalResidenceIdName" width="400"/>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="StudentIdName" class="control-label">Student Id</label>
+                <img src="~/UploadedFiles/@Model.StudentIdName" width="400" />
+            </div>
+        </div>
+        <b class="text-danger">
+            * In case the Student Id is not available, please attach a copy of Qassim
+            University student file.
+        </b>
+
+
+    </div>
+    <hr />
+    <!--6th row-->
+    <div class="row">
+        <b class="text-info">Kindly select a sutable date and time for needed test.</b>
+        <div class="col-3">
+            <div class="form-group">
+                <option class="form-control" readonly> @Html.DisplayFor(model => model.TestDate)</option>
+            </div>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input mx-1" type="checkbox" name="confirmation" checked>
+                I declare that the above-mentioned data is accurate and filled out by me pesonally.
+            </label>
+        </div>
+    </div>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+</form>
+</div>
+
+
+
+@*<div>
     <h4>Requests</h4>
     <hr />
     <dl class="row">
@@ -123,3 +286,4 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+*@

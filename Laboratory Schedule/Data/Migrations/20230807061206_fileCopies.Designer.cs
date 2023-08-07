@@ -4,6 +4,7 @@ using Laboratory_Schedule.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Laboratory_Schedule.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230807061206_fileCopies")]
+    partial class fileCopies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,9 +118,11 @@ namespace Laboratory_Schedule.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("NationalResidenceId")
+                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.Property<string>("NationalResidenceIdName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -126,6 +130,7 @@ namespace Laboratory_Schedule.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentIdName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentStatus")
@@ -136,6 +141,7 @@ namespace Laboratory_Schedule.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UniversityNumber")
+                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.HasKey("Id");

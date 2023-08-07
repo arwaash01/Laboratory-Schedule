@@ -89,10 +89,8 @@ namespace Laboratory_Schedule.Controllers
             }
             var limitDays = managment.Value;
 
-            //var avilabledates = _context.Mangement.ToList();
-            //vmstudentandcollages.AvailablDates = new SelectList(avilabledates, "Id", "Name", "Value");
-
             var dateTo = DateTime.Now.AddDays(30);
+
             List<DateTime> avilableDates = new List<DateTime>();
             for (var date = DateTime.Now; date <= dateTo; date = date.AddDays(1))
             {
@@ -107,7 +105,7 @@ namespace Laboratory_Schedule.Controllers
                 }
                 avilableDates.Add(date);
             }
-            ViewBag.AvailablDates = avilableDates;
+            vmStudentandCollages.AvailablDates = avilableDates;
            
             return View(vmStudentandCollages);
         }
@@ -117,7 +115,7 @@ namespace Laboratory_Schedule.Controllers
         [HttpPost] //  method of posting client data or form data to the server. HTTP
         [ValidateAntiForgeryToken]
        
-        public async Task<IActionResult> Create([Bind("Id,NationalResidenceId,UniversityNumber,StudentStatus,Collage,FirstNameEng,FatherNameEng,GrandFatherNameEng,FamilyNameEng,FirstNameArb,FatherNameArb,GrandFatherNameArb,FamilyNameArb,Email,PhoneNumber,BirthDate,MedicalFileNO,TestDate")] Request request)
+        public async Task<IActionResult> Create([Bind("Id,NationalResidenceId,UniversityNumber,StudentStatus,Collage,FirstNameEng,FatherNameEng,GrandFatherNameEng,FamilyNameEng,FirstNameArb,FatherNameArb,GrandFatherNameArb,FamilyNameArb,Email,PhoneNumber,BirthDate,MedicalFileNO,TestDate")] Request request,IFormFile NationalResidenceIdName,IFormFile StudentIdName)
         {
             VMStudentAndCollages vmStudentandCollages = new VMStudentAndCollages();
             var collages = _context.Collages.ToList();
@@ -137,8 +135,31 @@ namespace Laboratory_Schedule.Controllers
                 ViewBag.ErrorMessage = "Sorry,The limit of Requests for this Day is Reached";
                 return View(vmStudentandCollages);
             }
+                // save images in Folder / UploadedFiles
+                   // 1.generate GuId 
+                var NationalResidenceIdFileName = Guid.NewGuid().ToString() + ".jpg";
+                var StudentIdFileName = Guid.NewGuid().ToString() + ".jpg";
+                  // 2. get path
+                var NationalResidenceIdFullPath = System.IO.Path.Combine(
+                                        System.IO.Directory.GetCurrentDirectory(), "wwwroot", "UploadedFiles", NationalResidenceIdFileName);
+                var StudentIdFullPath = System.IO.Path.Combine(
+                                       System.IO.Directory.GetCurrentDirectory(), "wwwroot" , "UploadedFiles", StudentIdFileName);
+                  //3. stream / file mode create /
+                using(var stream = new System.IO.FileStream(NationalResidenceIdFullPath,System.IO.FileMode.Create))
+                {
+                    await NationalResidenceIdName.CopyToAsync(stream);
+                }
+                using (var stream = new System.IO.FileStream(StudentIdFullPath, System.IO.FileMode.Create))
+                {
+                    await StudentIdName.CopyToAsync(stream);
+                }
+                request.NationalResidenceIdName = NationalResidenceIdFileName;
+                request.StudentIdName = StudentIdFileName;
+           
             if (ModelState.IsValid)
             {
+                
+                
                 _context.Add(request);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));

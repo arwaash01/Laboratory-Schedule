@@ -8,7 +8,7 @@ namespace Laboratory_Schedule.Models
 
         public SelectList CollagesSelectList  { get; set; }
 
-        public SelectList AvailablDates { get; set; }
+        public List<DateTime> AvailablDates { get; set; }
 
     }
 }
