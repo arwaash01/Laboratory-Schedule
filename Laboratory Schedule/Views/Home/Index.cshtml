@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-
 @inject SignInManager<IdentityUser> SignINManager
 @inject UserManager<IdentityUser> UserManager
+
 
 @{
     ViewData["Title"] = "Home Page";
@@ -12,7 +12,11 @@
     <p>Learn about  .</p>
    @* <a asp-action="Index" asp-controller="Requestes" class="btn btn-info text-light">index for lab requst</a>
     <a asp-action="Create" asp-controller="Requestes" class="btn btn-info text-light">create lab requst for student</a>*@
+    <a asp-action="Index" asp-route-lang="en"  class="btn btn-primary">en</a>
+    <br />
+    <a asp-action="Index" asp-route-lang="ar" class="btn btn-primary">ar</a>
 
+    
    
 </div>
 @if (User.IsInRole("Admin") || User.IsInRole("Recep"))

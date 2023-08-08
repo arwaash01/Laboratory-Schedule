@@ -1,5 +1,6 @@
 ﻿using Laboratory_Schedule.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -18,8 +19,24 @@ namespace Laboratory_Schedule.Controllers
         }
 
 
-        public async Task <IActionResult> Index()
+        public IActionResult Index(string lang = "en")
         {
+            if (lang == "en")
+            {
+                Response.Cookies.Append(
+                    CookieRequestCultureProvider.DefaultCookieName,
+                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("en-US")),
+                    new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+                    );
+            }
+            else
+            {
+                Response.Cookies.Append(
+                    CookieRequestCultureProvider.DefaultCookieName,
+                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("ar-SA")),
+                    new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+                );
+            }
             return View();
         }
 
