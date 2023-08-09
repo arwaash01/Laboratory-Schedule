@@ -10,7 +10,7 @@ namespace Laboratory_Schedule.Resource
         {
             var type = typeof(SharedResource);
             var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
-            _localizer = factory.Create("sharedResource", assemblyName.Name);
+            _localizer = factory.Create("SharedResource", assemblyName.Name);
         }
         public LocalizedString Loc(String key)
         {
